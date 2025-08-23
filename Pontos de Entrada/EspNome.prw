@@ -13,4 +13,4 @@ Chamado na abertura do sistema, retorna o nome do modulo para o SIGAESP
 User Function EspNome()
 /**********************/
 
-Return "Gestão de Cemitério"
+Return "Gestão de Cemitérios e Crematórios"

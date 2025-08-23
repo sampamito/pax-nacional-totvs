@@ -19,6 +19,8 @@
 User Function TMKBARLA(aBotao, aTitulo)
     
     // Adiciona botões na toolbar lateral do Call Center da melhorias de atendimento.
-    U_RUTIL064(@aBotao)
+    If ExistBlock("RUTIL064")
+        U_RUTIL064(@aBotao)
+    EndIf
 
 Return aBotao

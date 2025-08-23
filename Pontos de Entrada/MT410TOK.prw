@@ -20,6 +20,4 @@ User Function MT410TOK()
 		lRet := U_RUTLE105()
 	EndIf
 
-	RestArea(aArea)
-
 Return(lRet)

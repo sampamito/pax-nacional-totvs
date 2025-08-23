@@ -60,6 +60,10 @@ User function FINA460A()
 
 				EndIf
 
+				If ExistBlock("RUTIL115") //DTGD-51
+					U_RUTIL115('',4, oModelFO1 )// executo a implementacao do codigo gravar os dados da liquidacao no titulo
+				EndIf
+
 			endif
 
 		ElseIf cIdPonto == 'BUTTONBAR' // Bloco substitui o ponto de entrada F460BOT.

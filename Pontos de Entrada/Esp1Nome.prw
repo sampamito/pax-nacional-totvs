@@ -14,7 +14,7 @@
 
 User Function Esp1Nome()
 
-Local cNomeModulo := "Planos Funerários"
+Local cNomeModulo := "Gestão de Planos Funerários e Funerárias"
 
 Return(cNomeModulo)
 

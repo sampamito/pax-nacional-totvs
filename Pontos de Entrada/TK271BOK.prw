@@ -14,7 +14,9 @@ User Function TK271BOK()
 
     // Validação da Renegociação financeira Virtus.
     If lRet
-        lRet := U_RUTIL062()
+        If ExistBlock("RUTIL062")
+            lRet := U_RUTIL062()
+        EndIf
     EndIf
 
     FwRestArea(aArea)
