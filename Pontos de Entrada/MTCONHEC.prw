@@ -10,13 +10,10 @@ Ponto de entrada para bloquear o botão "Banco Conhecimento para alguns usuários
 /*/
 User Function MTCONHEC()
 
-	Local lRetorno              := .F.
-	Local oVirtusGestaoAcessos	:= VirtusGestaoAcessos():New()
+	Local lRetorno              := .T.
 
-	oVirtusGestaoAcessos:AcessosUsuario()
-
-	If oVirtusGestaoAcessos:ValidaAcessos(18) .Or. oVirtusGestaoAcessos:ValidaAcessos(19) .Or. oVirtusGestaoAcessos:ValidaAcessos(20)// acesso a base de conhecimento
-		lRetorno := .T.
+	If ExistBlock("RTILE81F")
+		lRetorno := U_RTILE81F()
 	EndIf
 
 Return(lRetorno)

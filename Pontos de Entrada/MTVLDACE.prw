@@ -2,6 +2,7 @@
 
 /*/{Protheus.doc} MTVLDACE
 Ponto de entrada validar o acesso a rotina quando chamada pelo menu
+https://tdn.totvs.com/pages/releaseview.action?pageId=6085698
 @type function
 @version 1.0
 @author g.sampaio
@@ -10,13 +11,10 @@ Ponto de entrada validar o acesso a rotina quando chamada pelo menu
 /*/
 User Function MTVLDACE()
 
-	Local lRetorno              := .F.
-	Local oVirtusGestaoAcessos	:= VirtusGestaoAcessos():New()
+	Local lRetorno              := .T.
 
-	oVirtusGestaoAcessos:AcessosUsuario()
-
-	If oVirtusGestaoAcessos:ValidaAcessos(17) // acesso a base de conhecimento
-		lRetorno := .T.
+	If ExistBlock("RTILE81B")
+		lRetorno := U_RTILE81B()
 	EndIf
 
 Return(lRetorno)

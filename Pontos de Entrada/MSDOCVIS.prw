@@ -12,16 +12,9 @@ para somente visualizar o Conhecimento
 User Function MSDOCVIS()
 
 	Local lRetorno              := .T.
-	Local oVirtusGestaoAcessos	:= VirtusGestaoAcessos():New()
 
-	oVirtusGestaoAcessos:AcessosUsuario()
-
-	If oVirtusGestaoAcessos:ValidaAcessos(18) // incluir documentos
-		lRetorno := .F.
-	ElseIf oVirtusGestaoAcessos:ValidaAcessos(19) // alterar documentos
-		lRetorno := .F.
-	ElseIf oVirtusGestaoAcessos:ValidaAcessos(20) // excluir documentos
-		lRetorno := .F.
+	If ExistBlock("RTILE81D")
+		lRetorno := U_RTILE81D()
 	EndIf
 
 Return(lRetorno)

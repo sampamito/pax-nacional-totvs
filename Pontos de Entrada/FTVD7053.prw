@@ -10,9 +10,9 @@
 /*/
 User Function FTVD7053()
 
-    Local aArray  as array
+	Local aArray  as array
 
-    aArray := {}
+	aArray := {}
 
     /*
     Parâmetros do array aRotina: 
@@ -28,6 +28,8 @@ User Function FTVD7053()
     5. Nível de acesso 
     6. Habilita Menu Funcional 
     */
-	aAdd( aArray, { "Reimpressão do Recibo de Venda", "U_RUTILR21(.T.)" , 0, 1, , .F. } )    
+	If ExistBlock("RUTILR21")
+		aAdd( aArray, { "Reimpressão do Recibo de Venda", "U_RUTILR21(.T.)" , 0, 1, , .F. } )
+	EndIf
 
-Return aArray
+Return(aArray)

@@ -15,7 +15,7 @@ User Function CRMA980()
 	Local aParam        := PARAMIXB
 	Local xRet          := .T.
 	Local cIDPonto      := ''
-	Local cIDModel      := ''
+	//Local cIDModel      := ''
 	Local oObj          := NIL
 	Local aArea			:= GetArea()
 	Local lRecorrencia	:= SuperGetMv("MV_XATVREC",.F.,.F.)
@@ -119,6 +119,30 @@ User Function CRMA980()
 				EndIf
 
 			EndIf
+
+			// Incluir - Alterar Cadastro de Cliente
+			If nOperation == 3 .or. nOperation == 4
+
+				//*****************************
+				//* Criação do Item Contabilizacao: Inicio - Totvs Centro Norte 08.10.2024 
+				//*****************************
+				/* Funcao usada para validar a inclusao do Item Contabil do Cliente. */
+				If ExistBlock("CTBA001A")
+
+					cItemCtb:= U_CTBA001A("C"+SubStr(SA1->A1_COD,1,6)+SA1->A1_LOJA, SA1->A1_NOME)
+
+					If !Empty(cItemCtb)
+						If RecLock("SA1", .F.)
+							SA1->A1_XITEMCC := cItemCtb
+							SA1->(MsUnLock())
+						EndIf
+					EndIf
+
+				EndIf
+				//****
+				//* Fim 
+				//****
+			Endif
 
 		endif
 

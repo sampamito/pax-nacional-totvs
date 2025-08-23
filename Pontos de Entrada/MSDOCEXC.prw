@@ -14,12 +14,9 @@ somente pode incluir.
 User Function MSDOCEXC()
 
 	Local lRetorno              := .T.
-	Local oVirtusGestaoAcessos	:= VirtusGestaoAcessos():New()
 
-	oVirtusGestaoAcessos:AcessosUsuario()
-
-	If oVirtusGestaoAcessos:ValidaAcessos(20)
-		lRetorno := .F.
+	If ExistBlock("RTILE81C")
+		lRetorno := U_RTILE81C()
 	EndIf
 
 Return(lRetorno)

@@ -14,9 +14,13 @@ User Function FIN460E1()
 
 	Local oVirtusFin := Nil
 
-    oVirtusFin := VirtusFin():New()
+	If FindClass("VirtusFin")
 
-    // vou excluir as multiplas naturezas da liquidaao
-    oVirtusFin:ExcluiMultiNatLiquidacao(SE1->(Recno()))
+		oVirtusFin := VirtusFin():New()
+
+		// vou excluir as multiplas naturezas da liquidaao
+		oVirtusFin:ExcluiMultiNatLiquidacao(SE1->(Recno()))
+
+	EndIF
 
 Return(Nil)

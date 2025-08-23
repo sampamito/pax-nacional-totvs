@@ -10,7 +10,9 @@
 /*/
 User Function TMKCFIM()
 
-    // Executa a liquidação da negociação financeira.
-    U_RUTIL063()
-    
-Return 
+	// Executa a liquidação da negociação financeira.
+	If ExistBlock("RUTIL063")
+		U_RUTIL063()
+	EndIf
+
+Return(Nil)

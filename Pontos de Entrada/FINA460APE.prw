@@ -35,47 +35,11 @@ User function FINA460A()
 
 		If cIdPonto == 'MODELPOS' // Bloco substitui o ponto de entrada F460TOK e FA460CON
 
-			// verifico se o campo customizado de forma de pagamento existe
-			if FO2->(FieldPos("FO2_XFORPG")) > 0
+			If ExistBlock("RUTLE108")
 
-				//Valido se Forma de pagamento foi preenchida para as faturas/Liquidacao
-				For nX := 1 to oModelFO2:Length()
+				// executo a implementacao do codigo gravar os dados da liquidacao no titulo
+				xRet := U_RUTLE108( oModelFO2, oModelFO0, oModelFO1 )
 
-					oModelFO2:GoLine(nX)
-
-					//valida se preencheu a forma Pagto
-					if Empty(oModelFO2:GetValue("FO2_XFORPG"))
-
-						Help( ,, 'Atenção',, 'Forma de Pagamento não foi informada para todos os titulos gerados !', 1, 0 )
-						xRet := .F.
-						Exit
-					endif
-				Next nX
-
-			endif
-
-			If FindFunction("U_UVIND18")
-
-				//-- Verifica se titulos selecionados estao em recorrência na plataforma Vindi
-				For nX := 1 To oModelFO1:Length()
-
-					oModelFO1:GoLine(nX)
-
-					//-- Itens que foram marcados
-					If oModelFO1:GetValue("FO1_MARK")
-
-						//-- Valida atualização em títulos que estão em recorrência
-						xRet := U_UVIND18(oModelFO1:GetValue("FO1_PREFIX"),;
-							oModelFO1:GetValue("FO1_NUM"),;
-							oModelFO1:GetValue("FO1_PARCEL"),;
-							oModelFO1:GetValue("FO1_TIPO"))
-
-						If !xRet
-							Exit
-						EndIf
-					EndIf
-
-				Next nX
 			EndIf
 
 		ElseIf cIdPonto == 'MODELCANCEL' // Bloco substitui os pontos de entrada F460CAN, F460CON e F460SAID no cancelamento da tela de geração de liquidação.

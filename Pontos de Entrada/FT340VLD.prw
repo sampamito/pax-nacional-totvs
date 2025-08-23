@@ -10,19 +10,11 @@ FT340VLD: Valida se o usuário tem permissão para incluir, alterar ou excluir doc
 /*/
 User Function FT340VLD()
 
-	Local lRetorno              := .F.
+	Local lRetorno              := .T.
 	Local nOpc                  := ParamIXB[01] as numeric
-	Local cFunName              := ParamIXB[02] as character
-	Local oVirtusGestaoAcessos	:= VirtusGestaoAcessos():New()
 
-	oVirtusGestaoAcessos:AcessosUsuario()
-
-	If nOpc == 3 .And. oVirtusGestaoAcessos:ValidaAcessos(18) // incluir documentos
-		lRetorno := .T.
-	ElseIf  nOpc == 4 .And. oVirtusGestaoAcessos:ValidaAcessos(19) // alterar documentos
-		lRetorno := .T.
-	ElseIf  nOpc == 5 .And.oVirtusGestaoAcessos:ValidaAcessos(20) // excluir documentos
-		lRetorno := .T.
+	If ExistBlock("RTILE81E")
+		lRetorno := U_RTILE81E(nOpc)
 	EndIf
 
 Return(lRetorno)

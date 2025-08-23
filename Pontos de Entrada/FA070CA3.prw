@@ -13,7 +13,7 @@ pode ou nao ser cancelada.
 @since 08/04/2020
 @return lRet, logic
 /*/
-User Function FA070CA3
+User Function FA070CA3()
     Local lRet := .T.
 
     If FindFunction("U_UVIND18")

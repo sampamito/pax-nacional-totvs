@@ -17,29 +17,5 @@ Esta sendo utilizado para filtrar as comissões cujos os títulos já tenham sido r
 /*/
 
 User Function M530FIL()
-
-	Local cRet := "U_SE1FILTR()"
-
+	Local cRet := IIF(ExistBlock("RUTLE101"),"U_RUTLE101()",".T.")
 Return(cRet)
-
-//
-// Filtro para a SE3: somente os titulos da SE1 que ja tenham sido recebidos (baixados). 
-//
-User Function SE1FILTR()
-
-	Local aEstSE3 			:= SE3->(GetArea())
-	Local lRet 				:= .T.
-	Local lFuneraria		:= SuperGetMV("MV_XFUNE",,.F.)
-	Local lCemiterio		:= SuperGetMV("MV_XCEMI",,.F.)
-	Local oComissaoVirtus	:= Nil
-
-	// comissao virtus
-	oComissaoVirtus	:= ComissaoVirtus():New()
-
-	If (lCemiterio .And. !Empty(SE3->E3_XCONTRA)) .Or. (lFuneraria .And. !Empty(SE3->E3_XCTRFUN))
-		lRet := oComissaoVirtus:ValPagComissao(SE3->(Recno()))
-	EndIf
-
-	RestArea(aEstSE3)
-
-Return(lRet)

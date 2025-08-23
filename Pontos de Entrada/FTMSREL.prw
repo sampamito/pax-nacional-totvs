@@ -16,22 +16,8 @@ User Function FTMSREL()
 
 	Local aEntidade 	:= {}
 
-	Local lFuneraria	:= SuperGetMV("MV_XFUNE",,.F.)
-	Local lCemiterio	:= SuperGetMV("MV_XCEMI",,.F.)
-
-	Private aRotina
-
-	If lCemiterio .Or. lFuneraria
-
-		AAdd(aEntidade,{"U00",{"U00_CODIGO"},{||U00->U00_CODIGO}}) // Contrato - Cemitério
-		AAdd(aEntidade,{"U05",{"U05_CODIGO"},{||U05->U05_CODIGO}}) // Tipos de Plano
-		AAdd(aEntidade,{"UF2",{"UF2_CODIGO"},{||UF2->UF2_CODIGO}}) // Contrato - Funerária
-		AAdd(aEntidade,{"UG5",{"UG5_CODIGO"},{||UG5->UG5_CODIGO}}) // Gerador de Termos
-		AAdd(aEntidade,{"UF0",{"UF0_CODIGO"},{||UF0->UF0_CODIGO}}) // Tipos de Plano Funerarios
-		AAdd(aEntidade,{"UJ0",{"UJ0_CODIGO"},{||UJ0->UJ0_CODIGO}}) // Apontamento de Servico Funerario
-		AAdd(aEntidade,{"UJV",{"UJV_CODIGO"},{||UJV->UJ0_CODIGO}}) // Apontamento de Servico Cemiterial
-		AAdd(aEntidade,{"UJH",{"UJH_CODIGO"},{||UJH->UJH_CODIGO}}) // Contrato de Convalescente
-
-	Endif
-
-Return (aEntidade)
+	If ExistBlock("RUTILE98")
+		U_RUTILE98(@aEntidade)
+	EndIf
+	
+Return(aEntidade)

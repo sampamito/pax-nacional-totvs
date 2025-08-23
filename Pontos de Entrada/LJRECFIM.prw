@@ -26,45 +26,44 @@ quando estornado alguma baixa.
 /*/
 User Function LJRECFIM()
 
-Local aArea 	:= GetArea()
-Local aAreaSE1 	:= SE1->(GetArea())
-Local cOper 	:= ParamIXB[1]
-Local lRet 		:= ParamIXB[2]
-Local nValorTot := ParamIXB[3]
-Local aTitulo 	:= ParamIXB[4]
-Local aDadosEst := ParamIXB[5]
+	Local aArea 	:= GetArea()
+	Local aAreaSE1 	:= SE1->(GetArea())
+	Local cOper 	:= ParamIXB[1]
+	Local lRet 		:= ParamIXB[2]
+	Local nValorTot := ParamIXB[3]
+	Local aTitulo 	:= ParamIXB[4]
+	Local aDadosEst := ParamIXB[5]
 
-Local cVendedor := FT300VEND() //-> Obtem o codigo de vendedor do usuario logado, caso exista a associacao do usuario atual com um vendedor.
-Local nX := 0
+	Local cVendedor := FT300VEND() //-> Obtem o codigo de vendedor do usuario logado, caso exista a associacao do usuario atual com um vendedor.
+	Local nX := 0
 
-Local lFuneraria	:= SuperGetMV("MV_XFUNE",,.F.)
-Local lCemiterio	:= SuperGetMV("MV_XCEMI",,.F.)
+	Local lFuneraria	:= SuperGetMV("MV_XFUNE",,.F.)
+	Local lCemiterio	:= SuperGetMV("MV_XCEMI",,.F.)
 
-If lCemiterio .Or. lFuneraria 
-						
-	If !Empty(cVendedor) .and. cOper == "2" .and. Len(aDadosEst) > 0
-		
-		For nX:=1 to Len(aDadosEst)
-		
-				
-			DbSelectArea("SE1")
-			SE1->(DbSetOrder(2)) //E1_FILIAL+E1_CLIENTE+E1_LOJA+E1_PREFIXO+E1_NUM+E1_PARCELA+E1_TIPO
-			If SE1->(DbSeek(xFilial("SE1")+aDadosEst[nX,5]+aDadosEst[nX,6]+aDadosEst[nX,1]+aDadosEst[nX,2]+aDadosEst[nX,3]+aDadosEst[nX,4]))
-				
-				If Reclock("SE1", .F.)
-					SE1->E1_XVENDCB := "" 
-					SE1->E1_XFILVEN := "" 
-					SE1->(MsUnlock())
+	If lCemiterio .Or. lFuneraria
+
+		If !Empty(cVendedor) .and. cOper == "2" .and. Len(aDadosEst) > 0
+
+			For nX:=1 to Len(aDadosEst)
+
+				DbSelectArea("SE1")
+				SE1->(DbSetOrder(2)) //E1_FILIAL+E1_CLIENTE+E1_LOJA+E1_PREFIXO+E1_NUM+E1_PARCELA+E1_TIPO
+				If SE1->(DbSeek(xFilial("SE1")+aDadosEst[nX,5]+aDadosEst[nX,6]+aDadosEst[nX,1]+aDadosEst[nX,2]+aDadosEst[nX,3]+aDadosEst[nX,4]))
+
+					If Reclock("SE1", .F.)
+						SE1->E1_XVENDCB := ""
+						SE1->E1_XFILVEN := ""
+						SE1->(MsUnlock())
+					EndIf
+
 				EndIf
 
-			EndIf
-				
-		Next nX
-	
-	EndIf
-Endif
+			Next nX
 
-RestArea(aAreaSE1)
-RestArea(aArea)
-	
+		EndIf
+	Endif
+
+	RestArea(aAreaSE1)
+	RestArea(aArea)
+
 Return(Nil)
